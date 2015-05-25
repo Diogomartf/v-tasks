@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='UTF-8'>
+	<title>Document</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="app.css">
+</head>
+<body>
+		
+	<div class="container">
+		<div id="tasks">
+
+			<div>
+				
+				<h1>Tasks</h1>
+
+				<ol class="list-group">
+					<li class="list-group-item" v-repeat="task: tasks | inProcess">
+
+						<span v-on="dblclick: editTask(task)"> {{ task.body }} </span>
+
+						<button v-on="click: removeTask(task)">&#10007;</button>
+
+						<button v-on="click: completeTask(task)">&#10004;</button>
+						
+					</li>
+				</ol>
+
+			</div>
+
+			<form v-on="submit: addTask">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="I need to ..." v-model="newTask" v-el="newTask">
+				</div>
+				<button class="btn btn-primary">Add Task</button>
+			</form>
+			
+			<div>
+				
+				<h2>Completed</h2>
+
+				<ol class="list-group">
+					
+					<li v-repeat="task: tasks | filterBy true in completed">
+						
+						{{task.body}}
+
+					</li>
+
+				</ol>
+
+			</div>
+
+		</div>
+	</div>
+
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/0.11.10/vue.min.js"></script>
+	<script src="app.js"></script>
+</body>
+</html>
